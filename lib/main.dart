@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: ExpensesScreen(),
+    theme: ThemeData(useMaterial3: false),
+    home: const ExpensesScreen(),
   ));
 }
