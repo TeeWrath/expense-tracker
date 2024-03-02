@@ -146,16 +146,17 @@ class _NewExpenseState extends State<NewExpense> {
                   },
                   child: const Text(
                     'Cancel',
-                    style: TextStyle(color: Color.fromARGB(255, 103, 39, 176)),
+                    // style: TextStyle(color: Color.fromARGB(255, 103, 39, 176)),
                   )),
               ElevatedButton(
                   onPressed: _submitExpenseData,
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 103, 39, 176)),
+                  // style: ElevatedButton.styleFrom(
+                  //     backgroundColor: const Color.fromARGB(255, 103, 39, 176)),
                   child: const Text('Save Expense',
-                      style: TextStyle(
-                        color: Colors.white,
-                      )))
+                      // style: TextStyle(
+                      //   color: Colors.white,
+                      // )
+                      ))
             ],
           )
         ],
