@@ -37,7 +37,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     setState(() {
       _registeredExpenses.remove(expense);
     });
-    ScaffoldMessenger.of(context).clearSnackBars();// removes snackbar and shows next snackbar
+    ScaffoldMessenger.of(context)
+        .clearSnackBars(); // removes snackbar and shows next snackbar
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       duration: const Duration(seconds: 3),
       content: const Center(child: Text('Expense Deleted !!')),
@@ -53,6 +54,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
         isScrollControlled: true,
         context: context,
         builder: (ctx) => NewExpense(
@@ -62,6 +64,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Widget mainContent = const Center(
       child: Text('No Expenses here ! Start Adding Now !!!'),
     );
@@ -81,9 +84,14 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add))
         ],
       ),
-      body: Column(
+      body: width < 600 ? Column(
         children: [
           Chart(expenses: _registeredExpenses),
+          Expanded(child: mainContent),
+        ],
+      ) : Row(
+        children: [
+          Expanded(child: Chart(expenses: _registeredExpenses)),
           Expanded(child: mainContent),
         ],
       ),
