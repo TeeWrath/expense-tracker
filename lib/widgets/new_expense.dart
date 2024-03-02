@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:expense_tracker/models/expense.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NewExpense extends StatefulWidget {
@@ -29,16 +32,23 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
-  // Submitting expenses after entering inputs
-  void _submitExpenseData() {
-    final enteredAmount = double.tryParse(_amountController.text);
-    final amountIsInvalid = enteredAmount == null || enteredAmount < 0;
-
-    // to deal with error and invalid inputs
-    if (_titleController.text.trim().isEmpty ||
-        amountIsInvalid ||
-        _selectedDate == null) {
-      // error code
+  void _showDialog() {
+    if (Platform.isIOS) {
+      showCupertinoDialog(
+          context: context,
+          builder: (ctx) => CupertinoAlertDialog(
+                title: const Text('Invalid Input'),
+                content: const Text(
+                    'Please Make sure a valid title, amount and date was entered'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(ctx);
+                      },
+                      child: const Text('Okay'))
+                ],
+              ));
+    } else {
       showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
@@ -53,6 +63,20 @@ class _NewExpenseState extends State<NewExpense> {
                       child: const Text('Okay'))
                 ],
               ));
+    }
+  }
+
+  // Submitting expenses after entering inputs
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount < 0;
+
+    // to deal with error and invalid inputs
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) {
+      // error code
+      _showDialog();
       return;
     }
     // If correct values are entered
@@ -196,7 +220,8 @@ class _NewExpenseState extends State<NewExpense> {
                 ),
                 if (width >= 600)
                   Row(
-                    children: [const Spacer(),
+                    children: [
+                      const Spacer(),
                       TextButton(
                           onPressed: () {
                             Navigator.pop(context);
@@ -214,7 +239,8 @@ class _NewExpenseState extends State<NewExpense> {
                             // style: TextStyle(
                             //   color: Colors.white,
                             // )
-                          ))],
+                          ))
+                    ],
                   )
                 else
                   Row(
