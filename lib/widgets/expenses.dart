@@ -12,16 +12,16 @@ class ExpensesScreen extends StatefulWidget {
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
   final List<Expense> _registeredExpenses = [
-    // Expense(
-    //     title: 'Flutter Course',
-    //     amount: 19.99,
-    //     date: DateTime.now(),
-    //     category: Category.work),
-    // Expense(
-    //     title: 'Cinema',
-    //     amount: 200,
-    //     date: DateTime.now(),
-    //     category: Category.leisure)
+    Expense(
+        title: 'Flutter Course',
+        amount: 19.99,
+        date: DateTime.now(),
+        category: Category.work),
+    Expense(
+        title: 'Cinema',
+        amount: 200,
+        date: DateTime.now(),
+        category: Category.leisure)
   ];
 
   // to add the new expense to the list and update the UI
