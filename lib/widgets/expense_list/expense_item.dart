@@ -26,7 +26,7 @@ class ExpenseItem extends StatelessWidget {
                   children: [
                     Icon(categoryIcons[expense.category]),// This dynamically updates the icons
                     const SizedBox(width: 8,),
-                    Text(expense.date.toString())
+                    Text(expense.formattedDate)
                   ],
                 )
               ],
