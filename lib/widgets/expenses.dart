@@ -12,20 +12,32 @@ class ExpensesScreen extends StatefulWidget {
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
   final List<Expense> _registeredExpenses = [
-    Expense(
-        title: 'Flutter Course',
-        amount: 19.99,
-        date: DateTime.now(),
-        category: Category.work),
-    Expense(
-        title: 'Cinema',
-        amount: 200,
-        date: DateTime.now(),
-        category: Category.leisure)
+    // Expense(
+    //     title: 'Flutter Course',
+    //     amount: 19.99,
+    //     date: DateTime.now(),
+    //     category: Category.work),
+    // Expense(
+    //     title: 'Cinema',
+    //     amount: 200,
+    //     date: DateTime.now(),
+    //     category: Category.leisure)
   ];
 
+  // to add the new expense to the list and update the UI
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
+
   void _openAddExpenseOverlay() {
-    showModalBottomSheet(context: context, builder: (ctx) => const NewExpense());
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (ctx) => NewExpense(
+              onAddExpense: _addExpense,
+            ));
   }
 
   @override
